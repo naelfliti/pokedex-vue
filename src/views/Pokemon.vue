@@ -7,19 +7,47 @@
         type="card"
       ></v-skeleton-loader>
       <div v-else>
-        <div class="card--title" v-bind:style="backgroundColor">
+        <div class="card__title" v-bind:style="backgroundColor">
           #{{ pokemon.id }} {{ pokemon.name }}
         </div>
-        <div class="card--body">
+        <div class="label">Normal Form</div>
+        <div class="card__body">
           <div class="images">
-            <img  v-on:click="pokemonCry"  class="image" v-bind:src="pokemon.frontDefault" alt="image du pokemon" />
-            <img  v-on:click="pokemonCry"  class="image" v-bind:src="pokemon.backDefault" alt="image du pokemon" />
+            <img
+              v-on:click="pokemonCry"
+              class="image"
+              v-bind:src="pokemon.animatedSpriteFrontDefault"
+              alt="image du pokemon"
+            />
+            <img
+              v-on:click="pokemonCry"
+              class="image"
+              v-bind:src="pokemon.animatedSpriteBackDefault"
+              alt="image du pokemon"
+            />
+          </div>
+          <audio controls :src="pokemon.sound"></audio>
+        </div>
+        <div class="label">Shiny Form</div>
+        <div class="card__body">
+          <div class="images">
+            <img
+              v-on:click="pokemonCry"
+              class="image"
+              v-bind:src="pokemon.animatedSpriteFrontShiny"
+              alt="image du pokemon"
+            />
+            <img
+              v-on:click="pokemonCry"
+              class="image"
+              v-bind:src="pokemon.animatedSpriteBackShiny"
+              alt="image du pokemon"
+            />
           </div>
           <audio controls :src="pokemon.sound"></audio>
         </div>
       </div>
     </div>
-
     <div class="link">
       <router-link v-bind:to="`/pokemon/${pokemon.id - 1}`">
         &lt; Pokémon précédent</router-link
@@ -43,6 +71,18 @@ ul {
   flex-direction: column;
 }
 
+audio {
+  display: none;
+}
+
+.label{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: $gray-dark;
+  font-size: 0.7rem;
+}
+
 .loader {
   width: 100%;
   height: 400px;
@@ -50,7 +90,7 @@ ul {
 
 .card {
   width: 400px;
-  &--title {
+  &__title {
     text-transform: capitalize;
     padding: 20px;
     justify-content: center;
@@ -58,9 +98,8 @@ ul {
     height: 20%;
     display: flex;
     align-items: center;
-    box-shadow: 0px 10px 13px -7px #000000, 5px 5px 15px 5px rgba(0, 0, 0, 0);
   }
-  &--body {
+  &__body {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -86,8 +125,7 @@ ul {
 
 <script>
 import PokemonService from "../services/pokemonService";
-import {gsap, Bounce} from 'gsap'
-
+import { gsap, Bounce } from "gsap";
 
 export default {
   data() {
@@ -99,10 +137,14 @@ export default {
   },
   methods: {
     pokemonCry: function (e) {
-      gsap.from(e.target, {ease: Bounce.easeOut, y: -50, onStart: ()=>{
-        document.querySelector('audio').play();
-      } })
-    }
+      gsap.from(e.target, {
+        ease: Bounce.easeOut,
+        y: -50,
+        onStart: () => {
+          document.querySelector("audio").play();
+        },
+      });
+    },
   },
   watch: {
     "$route.params.id": function () {
@@ -184,7 +226,6 @@ export default {
       this.pokemon = p;
       this.loading = false;
     });
-
   },
 };
 </script>

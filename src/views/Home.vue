@@ -42,13 +42,26 @@
     text-transform: uppercase;
     font-weight: 900;
     font-style: italic;
+    padding: 1rem;
+    text-align: center;
   }
 }
 .column {
   display: flex;
   justify-content: center;
+
   p {
-    margin: 0;
+    width: 100px;
+    height: 90%;
+    position: absolute;
+    top: 0;
+    left: 10px;
+    background: $primary;
+    color: $black;
+    font-weight: bold;
+    padding: 0.2rem 1rem;
+    border-radius: 0 0 47px 47px;
+    z-index: 0;
   }
   a {
     text-transform: capitalize;
@@ -57,6 +70,18 @@
     .pokemon {
       animation: $bounce;
     }
+  }
+  .result {
+    display: flex;
+    position: relative;
+    align-items: center;
+    background: $gray;
+    max-width: 11.5rem;
+    min-width: 11.5rem;
+    max-height: 13rem;
+    min-height: 13rem;
+    padding: 0 1rem;
+    border: 1px solid $gray-dark;
   }
 }
 </style>

@@ -1,5 +1,7 @@
-$primary : #CC0000;
+$primary : #cc0000c5;
 $gray: #ebebeb;
+$black: #2b2b2b;
+$gray-dark : #bdbdbd;
 $bounce : .6s linear bounce; 
 
 @keyframes bounce {
@@ -10,4 +12,10 @@ $bounce : .6s linear bounce;
   75%  { transform: scale(1,1)      translateY(-30px); }
   90%  { transform: scale(1,1)      translateY(0); }
   100% { transform: scale(1,1)      translateY(0); }
+}
+
+.home{
+  .v-image__image--cover{
+    background-size: unset;
+  }
 }

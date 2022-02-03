@@ -13,9 +13,7 @@ class pokeAnim {
 
     
     this.pokemons.forEach(image => {
-      console.log(image)
         image.addEventListener("click", ()=>{
-          console.log('ici')
         gsap.to(image, {ease: Bounce.easeOut, y: -50 })
       })
     });

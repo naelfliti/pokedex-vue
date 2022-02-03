@@ -5,13 +5,14 @@ export default class PokemonService {
     fetchPokemons(){
         return new Promise(resolve =>{
             const result = []
-            axios.get('https://pokeapi.co/api/v2/pokemon?limit=151').then(response =>{
+            axios.get('https://pokeapi.co/api/v2/pokemon?limit=107&offset=386').then(response =>{
                 console.log(response)
                 const pokemonArray = response.data.results
                 pokemonArray.forEach(p => {
                     const urlFragments = p.url.split('/')
                     const pokemonId = urlFragments[urlFragments.length - 2]
-                    const pokemonSprite = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemonId}.png`
+                    // const pokemonSprite = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemonId}.png`
+                    const pokemonSprite = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/${pokemonId}.gif`
                     const pokemon = new Pokemon(pokemonId, p.name);
                     pokemon.sprite = pokemonSprite;
                     result.push(pokemon);
@@ -34,14 +35,11 @@ export default class PokemonService {
                 // Instancie le pokémon.
                 const result = new Pokemon(pokemonData.id, pokemonData.name);
                 // On affecte les sprites.
-                result.backDefault = pokemonData.sprites.back_default;
-                result.backFemale = pokemonData.sprites.back_female;
-                result.backShiny = pokemonData.sprites.back_shiny;
-                result.backShinyFemale = pokemonData.sprites.back_shiny_female;
+                result.animatedSpriteBackDefault = pokemonData.sprites.versions['generation-v']['black-white'].animated.back_default;
+                result.animatedSpriteFrontDefault = pokemonData.sprites.versions['generation-v']['black-white'].animated.front_default;
+                result.animatedSpriteBackShiny = pokemonData.sprites.versions['generation-v']['black-white'].animated.back_shiny;
+                result.animatedSpriteFrontShiny = pokemonData.sprites.versions['generation-v']['black-white'].animated.front_shiny;
                 result.frontDefault = pokemonData.sprites.front_default;
-                result.frontDemale = pokemonData.sprites.front_female;
-                result.frontShiny = pokemonData.sprites.front_shiny;
-                result.frontShinyFemale = pokemonData.sprites.front_shiny_female;
                 // On affecte les types.
                 result.types = types;
                 result.sound = `https://www.pokebip.com/audio/cris-sl/${id}.mp3`

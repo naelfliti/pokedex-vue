@@ -6,6 +6,10 @@ export default class Pokemon {
     spriteFront;
     spriteShinyBack;
     spriteShinyFront;
+    animatedSpriteBackDefault;
+    animatedSpriteFrontDefault;
+    animatedSpriteBackShiny;
+    animatedSpriteFrontShiny;
     // tableau de types
     types;
     // cris des pokemons
